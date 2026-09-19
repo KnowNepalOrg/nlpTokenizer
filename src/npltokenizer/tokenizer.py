@@ -37,6 +37,7 @@ grapheme-aware layer (e.g. ``\\X`` clusters) or a byte-level layer
 from __future__ import annotations
 
 import json
+import os
 import re
 import unicodedata
 from collections import Counter
@@ -82,9 +83,8 @@ def count_pairs(splits: Dict[str, List[str]], frequencies: Dict[str, int]) -> Co
     help the most.
 
     Example word ``नेपाल`` (symbols ``["न", "े", "प", "ा", "ल", "</w>"]``)
-    contributes one count to each of:
-        (न, े), (े, प), (प, ा), (ा, ल), (ल, </w>)
-    checking the first index0/1 box: yes, those five adjacent pairs.
+    contributes one count to each of the adjacent pairs
+        (न, े)  (े, प)  (प, ा)  (ा, ल)  (ल, </w>)
     """
     pair_counts: Counter = Counter()
     for word, symbols in splits.items():
@@ -517,7 +517,9 @@ class NepaliBPETokenizer:
         }
 
     def save(self, path: str) -> None:
-        """Persist the tokenizer to a JSON file."""
+        """Persist the tokenizer to a JSON file (creating parent dirs)."""
+        parent = os.path.dirname(os.path.abspath(path))
+        os.makedirs(parent, exist_ok=True)
         with open(path, "w", encoding="utf-8") as handle:
             json.dump(self.to_dict(), handle, ensure_ascii=False, indent=2)
 
