@@ -76,10 +76,10 @@ def test_get_pair_counts_weights_by_frequency() -> None:
     counts = tok.get_pair_counts()
     # ('न','े') appears once in नेपाल(×2) and once in नेपाली(×1) -> 3.
     assert counts[("न", "े")] == 3
-    # 'ल' followed by word-end appears in नेपाल(×2) + नेपाली(×1) -> 3.
-    assert counts[("ल", WORD_END)] == 3
+    # 'ल' followed by word-end appears only in नेपाल(×2); नेपाली has 'ल ी'.
+    assert counts[("ल", WORD_END)] == 2
     assert counts[("ह", "ो")] == 3
-    # Word-internal symbols are code points; the 'े' of 'हो' is 'ो'.
+    # Word-internal symbols are code points; the vowel of 'हो' is 'ो'.
     assert counts[("ो", WORD_END)] == 3
 
 

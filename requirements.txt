@@ -1,0 +1,2 @@
+# NepaliBPETokenizer uses only the Python standard library.
+# No third-party dependencies are required to train, encode, or decode.

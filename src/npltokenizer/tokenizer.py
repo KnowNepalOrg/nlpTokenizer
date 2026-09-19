@@ -333,7 +333,9 @@ class NepaliBPETokenizer:
         if num_merges <= 0:
             return 0
         if progress_every is None:
-            progress_every = max(1, num_merges // 10)
+            # One progress line per 10% (or none at all for tiny budgets,
+            # to keep short trainings quiet).
+            progress_every = num_merges // 10 if num_merges >= 25 else 0
 
         performed = 0
         for step in range(1, num_merges + 1):

@@ -114,7 +114,6 @@ def compute_merge_budget(tokenizer: NepaliBPETokenizer,
 def demo_round_trip(tokenizer: NepaliBPETokenizer) -> None:
     """Small end-to-end demonstration used at the very end of training."""
     sample = "नेपाल एउटा सुन्दर देश हो।"
-    user_text_style = "input"
     ids = tokenizer.encode(sample)
     tokens = tokenizer.tokenize(sample)
     decoded = tokenizer.decode(ids)
@@ -131,9 +130,7 @@ def demo_round_trip(tokenizer: NepaliBPETokenizer) -> None:
     if ok:
         print()
         print(PIPELINE)
-        print(f"'{user_text_style} नेपाल एउटा सुन्दर देश हो।' -> "
-              f"{len(tokenizer.encode(sample))} token ids -> "
-              f"'{decoded}'")
+        print(f"'{sample}' -> {ids} -> '{decoded}'")
 
 
 def main(argv: Optional[List[str]] = None) -> int:

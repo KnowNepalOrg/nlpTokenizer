@@ -1,7 +1,7 @@
 [project]
 name = "npltokenizer"
 version = "0.1.0"
-description = "Add your description here"
+description = "A from-scratch Byte Pair Encoding (BPE) tokenizer for Nepali (Devanagari), standard library only"
 readme = "README.md"
 authors = [
     { name = "sanshre-sandip", email = "mail@sandipshrestha2066.com.np" }
@@ -11,6 +11,7 @@ dependencies = []
 
 [project.scripts]
 npltokenizer = "npltokenizer:main"
+nplt-train = "npltokenizer.train:main"
 
 [build-system]
 requires = ["uv_build>=0.12.10,<0.13.0"]
